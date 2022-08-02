@@ -1,0 +1,387 @@
+@use "../utils" as *;
+
+:root {
+  --screen-height: 100vh;
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  min-height: var(--screen-height) !important;
+  overflow: hidden;
+  justify-content: space-between;
+
+  header {
+    // flex: 1;
+    padding: rem(50) 0;
+
+    .sub-title {
+      max-width: rem(404);
+      width: 100%;
+      margin: 0 auto;
+    }
+
+    .buttons {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      & ._btn:nth-child(1) {
+        width: rem(162);
+      }
+      & ._btn:nth-child(2) {
+        width: rem(144);
+      }
+
+      & > :not(:last-child) {
+        margin-right: rem(16);
+      }
+    }
+
+    .footer {
+      display: none;
+    }
+  }
+
+  .phones {
+    // flex: 1;
+    margin: 0 auto;
+    width: 38%;
+    display: flex;
+    align-items: center;
+    margin-top: 12%;
+    z-index: 50;
+    position: relative;
+
+    --arrow-width: 2.8vw;
+    --mobile-font-size: 0.9vw;
+    --tranistion: all 0.4s ease;
+
+    .phone {
+      width: 100%;
+      transform: scale3d(1, 1, 1);
+      transition: var(--tranistion);
+      // opacity: 0.5;
+      width: 100%;
+      min-height: 100%;
+      display: flex;
+      position: relative;
+
+      &::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(30, 34, 42, 0.5);
+        z-index: 10;
+        border-radius: 12%;
+        transition: var(--tranistion);
+      }
+
+      .mobile-img {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: var(--tranistion);
+        outline: 1px solid transparent;
+      }
+    }
+
+    .phone-assets {
+      position: absolute;
+      z-index: 50;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      opacity: 0;
+      transition: all 0.4s ease;
+
+      & > :not(:last-child) {
+        margin-bottom: rem(8);
+      }
+
+      .phone-title {
+        font-size: var(--mobile-font-size);
+        text-align: center;
+        width: 100vw;
+      }
+      .arrow {
+        transition: all 0.4s ease;
+        width: var(--arrow-width) !important;
+      }
+    }
+
+    .one {
+      margin-right: -6%;
+      .phone-assets {
+        left: 74%;
+        top: -10%;
+        align-items: center;
+
+        .phone-title {
+          transform: rotate(7deg);
+        }
+
+        .arrow {
+          margin-right: var(--arrow-width);
+        }
+      }
+    }
+    .two {
+      .phone-assets {
+        left: 73%;
+        top: -10%;
+        align-items: center;
+
+        .phone-title {
+          transform: rotate(7deg);
+        }
+
+        .arrow {
+          margin-right: var(--arrow-width);
+        }
+      }
+    }
+    .three {
+      margin-left: -6%;
+
+      .phone-assets {
+        right: 74%;
+        top: -10%;
+        align-items: center;
+
+        .phone-title {
+          transform: rotate(7deg);
+        }
+
+        .arrow {
+          margin-left: var(--arrow-width);
+          transform: rotateY(180deg);
+        }
+      }
+    }
+
+    .phone.active {
+      transform: scale3d(1.4, 1.4, 1.4) translateY(-20px);
+      z-index: 10;
+      opacity: 1;
+
+      &::before {
+        background-color: rgba(30, 34, 42, 0);
+      }
+
+      .phone-assets {
+        opacity: 1;
+      }
+
+      .mobile-img {
+        filter: drop-shadow(0px 0px 30px rgb(0, 0, 0));
+      }
+    }
+
+    div.active-2 {
+      // transform: scale3d(1, 1, 1) translateY(16%);
+      transform: scale3d(0.8, 0.8, 0.8);
+      z-index: -20;
+    }
+  }
+
+  footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: absolute;
+    width: 90%;
+    bottom: 50px;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10;
+
+    .links {
+      display: flex;
+      align-items: center;
+
+      & > :not(:last-child) {
+        margin-right: rem(18);
+      }
+
+      a {
+        opacity: 0.6;
+      }
+    }
+  }
+}
+
+// ==================================================================================
+// ==================================================================================
+// ==================================================================================
+// ============================ BREAKPOINT ==========================================
+// ==================================================================================
+// ==================================================================================
+// ==================================================================================
+
+@media (max-height: 740px) and (max-width: 1000px) {
+  .main {
+    justify-content: space-between;
+
+    .phones {
+      flex: unset !important;
+      width: 80% !important;
+      max-width: 260px !important;
+      margin-top: 0 !important;
+    }
+  }
+}
+
+@media (max-height: 660px) and (max-width: 1000px) {
+  .main {
+    justify-content: space-between;
+    .phones {
+      flex: unset !important;
+      max-width: 200px !important;
+      margin-top: 0% !important;
+      // border: 2px solid red !important;
+    }
+
+    header {
+      .buttons {
+        & button:nth-child(1) {
+          width: 90px !important;
+        }
+        & button:nth-child(2) {
+          width: 80px !important;
+        }
+      }
+    }
+
+    footer {
+      .fs-14px {
+        font-size: rem(10);
+      }
+    }
+  }
+}
+
+@include breakpoint(twoxLarge) {
+  .main {
+    header {
+      .buttons {
+        & ._btn:nth-child(1) {
+          width: 132px;
+        }
+        & ._btn:nth-child(2) {
+          width: 114px;
+        }
+      }
+    }
+  }
+}
+@include breakpoint(xLarge) {
+  .main {
+    header {
+      padding: rem(30) 0;
+    }
+
+    .phones {
+      width: 32%;
+      margin-top: 8%;
+    }
+  }
+}
+@include breakpoint(large) {
+  .main {
+    .buttons {
+      & ._btn:nth-child(1) {
+        width: rem(112) !important;
+      }
+      & ._btn:nth-child(2) {
+        width: rem(102) !important;
+      }
+
+      & > :not(:last-child) {
+        margin-right: rem(16);
+      }
+    }
+
+    .phones {
+      --arrow-width: 1.8rem;
+      --mobile-font-size: 0.6rem !important;
+
+      max-width: 320px;
+      width: 84% !important;
+      margin-top: rem(20) !important;
+      margin-bottom: 2% !important;
+
+      .phone.active {
+        transform: scale3d(1.4, 1.4, 1.4) translateY(0px) !important;
+      }
+    }
+
+    footer {
+      position: static !important;
+      top: unset !important;
+      bottom: unset !important;
+      left: unset !important;
+      transform: unset !important;
+      margin: 0 auto;
+      margin-bottom: rem(50);
+    }
+  }
+}
+@include breakpoint(medium) {
+  .main {
+    footer {
+      flex-direction: column;
+      align-items: center;
+      margin-bottom: rem(30) !important;
+      bottom: unset !important;
+      transform: unset !important;
+      text-align: center;
+
+      & > :not(:last-child) {
+        margin-bottom: rem(14);
+      }
+    }
+  }
+}
+@include breakpoint(small) {
+  .main {
+    header {
+      .buttons {
+        & ._btn:nth-child(1) {
+          width: 112px;
+        }
+        & ._btn:nth-child(2) {
+          width: 94px;
+        }
+      }
+    }
+  }
+}
+@include breakpoint(xsmall) {
+  .main {
+    .phones {
+      --arrow-width: 1.6rem;
+    }
+  }
+}
+
+// 360px
+@media (max-width: 22.5em) {
+  .main {
+    footer {
+      .fs-14px {
+        font-size: rem(12);
+      }
+
+      .links {
+        & > :not(:last-child) {
+          margin-right: rem(12);
+        }
+      }
+    }
+  }
+}
